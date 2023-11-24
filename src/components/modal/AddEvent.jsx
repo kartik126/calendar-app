@@ -1,6 +1,5 @@
 import { timeOptions } from "../../data/timeOptions";
 
-
 const mobileStyle = {
   position: "fixed",
   top: "50%",
@@ -18,16 +17,13 @@ const AddEvent = ({
   deleteEvent,
   closeEventForm,
   popupPosition,
-  showEventForm
+  showEventForm,
 }) => {
-
   return (
     <div
+      id="event-form"
       className="p-3 border border-1 border-gray-200 bg-gray-100 text-[#2c3e50] lg:w-1/5 rounded-lg shadow-lg z-10"
       style={{
-        position: "absolute",
-        top: popupPosition.top,
-        left: popupPosition.left,
         ...(showEventForm && window.innerWidth <= 767 ? mobileStyle : {}),
       }}
     >

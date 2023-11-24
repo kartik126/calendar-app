@@ -9,24 +9,42 @@ import { useNavigate } from "react-router-dom";
 
 import { v4 as uuidv4 } from "uuid";
 import AddEvent from "../modal/AddEvent";
+import { openEventForm } from "../../utils/openEventForm";
 
 const Calendar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const events = useSelector((state) => state.events.data);
 
+  // State to manage the visibility of the event form modal
   const [showEventForm, setShowEventForm] = useState(false);
+  // State to store details of the selected event
   const [selectedEvent, setSelectedEvent] = useState(null);
+  // State to store the selected date
   const [selectedDate, setSelectedDate] = useState(null);
+  // State to store the position of the event form modal
   const [popupPosition, setPopupPosition] = useState({ top: 0, left: 0 });
+  // State to track the mode of the form (dateClick or eventClick)
   const [formMode, setFormMode] = useState(null);
 
-  //on click date handler
+  // useEffect to apply styles to the event form modal after component update
+  useEffect(() => {
+    if (showEventForm) {
+      const eventForm = document.getElementById("event-form");
+      if (eventForm) {
+        // Apply styles to position the event form modal
+        eventForm.style.position = "absolute";
+        eventForm.style.top = popupPosition.top;
+        eventForm.style.left = popupPosition.left;
+      }
+    }
+  }, [showEventForm, popupPosition]);
+
+  // Click handler for dates in the calendar
   const handleDateClick = (arg) => {
-    setPopupPosition({
-      top: arg.jsEvent.clientY - 10,
-      left: arg.jsEvent.clientX - 150,
-    });
+    // Open the event form modal and set its position
+    openEventForm(arg.jsEvent, setPopupPosition);
+
     setSelectedEvent({
       id: "",
       title: "",
@@ -39,8 +57,9 @@ const Calendar = () => {
     setFormMode("dateClick");
   };
 
-  //handle specific event
+  // Click handler for specific events in the calendar
   const handleEventClick = (eventInfo) => {
+    openEventForm(eventInfo.jsEvent, setPopupPosition);
     setShowEventForm(true);
     const clickedEvent = eventInfo.event.toPlainObject();
     setSelectedEvent({
@@ -50,7 +69,7 @@ const Calendar = () => {
     setFormMode("eventClick");
   };
 
-  //handler for event details to be displayed on calendar
+  // Custom content for displaying event details on the calendar
   const handleEventContent = (arg) => {
     return (
       <div>
@@ -67,7 +86,7 @@ const Calendar = () => {
     );
   };
 
-  //navigatge to day view page on click of specific date
+  // Navigate to day view page on click of a specific date
   const navigateToDayView = (date) => {
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, "0");
@@ -83,9 +102,10 @@ const Calendar = () => {
     setSelectedEvent(null);
   };
 
-  //add or update event
+  // Add or update event
   const saveEventForm = (formData) => {
     if (formData.id) {
+      // Dispatch action to update existing event
       dispatch(
         updateEvent({
           id: formData.id,
@@ -96,13 +116,14 @@ const Calendar = () => {
         })
       );
     } else {
+      // Dispatch action to add a new event
       const newEvent = { ...formData, id: uuidv4() };
       dispatch(addEvent(newEvent));
     }
     closeEventForm();
   };
 
-  //delete a specific event using event id
+  // Delete a specific event using event id
   const deleteEvent = () => {
     if (selectedEvent) {
       dispatch(removeEvent({ id: selectedEvent.id }));
