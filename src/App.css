@@ -1,4 +1,14 @@
-.gradient {
-  background: rgb(135, 244, 181);
-  background: linear-gradient(125deg, rgba(135, 244, 181, 0.7077424719887955) 0%, rgba(147, 203, 241, 1) 49%);
+
+.fc-header-toolbar {
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+/* Media query for screens with a maximum width of 767px (typical mobile devices) */
+@media (max-width: 767px) {
+  .fc-header-toolbar {
+    display: block !important;
+    flex-direction: row !important;
+    margin-top:12px;
+  }
 }

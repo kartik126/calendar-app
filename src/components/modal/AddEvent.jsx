@@ -1,7 +1,12 @@
-// Define an array of time options (you can adjust the options based on your needs)
-
 import { timeOptions } from "../../data/timeOptions";
 
+
+const mobileStyle = {
+  position: "fixed",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+};
 
 const AddEvent = ({
   selectedEvent,
@@ -13,7 +18,9 @@ const AddEvent = ({
   deleteEvent,
   closeEventForm,
   popupPosition,
+  showEventForm
 }) => {
+
   return (
     <div
       className="p-3 border border-1 border-gray-200 bg-gray-100 text-[#2c3e50] lg:w-1/5 rounded-lg shadow-lg z-10"
@@ -21,6 +28,7 @@ const AddEvent = ({
         position: "absolute",
         top: popupPosition.top,
         left: popupPosition.left,
+        ...(showEventForm && window.innerWidth <= 767 ? mobileStyle : {}),
       }}
     >
       <p className="text-center text-sm mb-3 font-bold text-gray-700">
@@ -128,7 +136,7 @@ const AddEvent = ({
             type="button"
             onClick={closeEventForm}
           >
-            Cancel
+            Close
           </button>
         </div>
       </form>

@@ -111,6 +111,7 @@ const Calendar = () => {
         now={new Date()}
         navLinks={true}
         navLinkDayClick={navigateToDayView}
+        height={700}
       />
       {showEventForm && (
         // Add, update and remove event modal
@@ -124,6 +125,7 @@ const Calendar = () => {
           closeEventForm={closeEventForm}
           popupPosition={popupPosition}
           setShowEventForm={showEventForm}
+          showEventForm={showEventForm}
         />
       )}
     </div>
