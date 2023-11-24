@@ -1,10 +1,8 @@
-
 .fc-header-toolbar {
   display: flex !important;
   flex-direction: row !important;
 }
 
-/* Media query for screens with a maximum width of 767px (typical mobile devices) */
 @media (max-width: 767px) {
   .fc-header-toolbar {
     display: block !important;

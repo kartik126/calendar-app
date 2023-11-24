@@ -78,8 +78,6 @@ const AddEvent = ({
               required
             />
           </label>
-
-          {/* Time dropdown */}
           <label className="text-sm flex flex-col">
             Time:
             <select

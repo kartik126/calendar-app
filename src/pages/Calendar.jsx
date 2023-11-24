@@ -4,10 +4,12 @@ import { useParams } from "react-router-dom";
 import Container from "../components/layouts/Container";
 
 function Calendar() {
+
   const { date } = useParams();
 
   const events = useSelector((state) => state.events.data);
 
+  //get events for specific date 
   const filterEvents = events.filter((event) => event.date === date);
 
   console.log(filterEvents);

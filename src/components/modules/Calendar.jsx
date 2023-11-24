@@ -15,8 +15,6 @@ const Calendar = () => {
   const dispatch = useDispatch();
   const events = useSelector((state) => state.events.data);
 
-  console.log(events);
-
   const [showEventForm, setShowEventForm] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -41,16 +39,6 @@ const Calendar = () => {
     setFormMode("dateClick");
   };
 
-  //navigatge to day view page on click of specific date
-  const navigateToDayView = (date) => {
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const day = date.getDate().toString().padStart(2, "0");
-
-    const formattedDate = `${year}-${month}-${day}`;
-    navigate(`/calendar/${formattedDate}`);
-  };
-
   //handle specific event
   const handleEventClick = (eventInfo) => {
     setShowEventForm(true);
@@ -62,6 +50,7 @@ const Calendar = () => {
     setFormMode("eventClick");
   };
 
+  //handler for event details to be displayed on calendar
   const handleEventContent = (arg) => {
     return (
       <div>
@@ -76,6 +65,16 @@ const Calendar = () => {
         )}
       </div>
     );
+  };
+
+  //navigatge to day view page on click of specific date
+  const navigateToDayView = (date) => {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
+
+    const formattedDate = `${year}-${month}-${day}`;
+    navigate(`/calendar/${formattedDate}`);
   };
 
   // Close the event form modal
