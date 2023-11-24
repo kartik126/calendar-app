@@ -16,7 +16,7 @@ const AddEvent = ({
 }) => {
   return (
     <div
-      className="p-3 border border-1 border-gray-200 bg-gray-100 text-[#2c3e50] w-1/5 rounded-lg shadow-lg z-10"
+      className="p-3 border border-1 border-gray-200 bg-gray-100 text-[#2c3e50] lg:w-1/5 rounded-lg shadow-lg z-10"
       style={{
         position: "absolute",
         top: popupPosition.top,

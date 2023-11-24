@@ -6,7 +6,7 @@ function Home() {
   return (
     <Container>
       <h1 className="text-xl font-bold">Calendar</h1>
-      <div className="p-20">
+      <div className="p-0 lg:p-20">
         <Calendar />
       </div>
     </Container>

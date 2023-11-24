@@ -17,9 +17,17 @@ function Calendar() {
       <div className="text-center text-gray-800">
         <h4 className="text-lg font-bold ">My Events on {date}</h4>
         <ul>
-          {filterEvents.map((event) => {
-            return <li className="text-sm">{event.title} {event.time}</li>;
-          })}
+          {filterEvents.length > 0 ? (
+            filterEvents.map((event) => {
+              return (
+                <li className="text-sm">
+                  {event.title} {event.time}
+                </li>
+              );
+            })
+          ) : (
+            <li>No events</li>
+          )}
         </ul>
       </div>
     </Container>
