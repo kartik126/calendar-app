@@ -53,10 +53,6 @@ const Calendar = () => {
 
   //handle specific event
   const handleEventClick = (eventInfo) => {
-    // setPopupPosition({
-    //   top: arg.jsEvent.clientY - 10,
-    //   left: arg.jsEvent.clientX - 150,
-    // });
     setShowEventForm(true);
     const clickedEvent = eventInfo.event.toPlainObject();
     setSelectedEvent({
@@ -64,6 +60,22 @@ const Calendar = () => {
     });
     setSelectedDate(eventInfo.event.start.toISOString().split("T")[0]);
     setFormMode("eventClick");
+  };
+
+  const handleEventContent = (arg) => {
+    return (
+      <div>
+        <strong>{arg.event.title}</strong>
+        <br />
+        {arg.event.extendedProps.time && (
+          <span>{arg.event.extendedProps.time}</span>
+        )}
+        <br />
+        {arg.event.extendedProps.description && (
+          <span>{arg.event.extendedProps.description}</span>
+        )}
+      </div>
+    );
   };
 
   // Close the event form modal
@@ -108,6 +120,7 @@ const Calendar = () => {
         dateClick={handleDateClick}
         events={events}
         eventClick={(info) => handleEventClick(info)}
+        eventContent={handleEventContent}
         now={new Date()}
         navLinks={true}
         navLinkDayClick={navigateToDayView}
